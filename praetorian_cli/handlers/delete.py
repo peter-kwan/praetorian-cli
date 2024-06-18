@@ -22,4 +22,4 @@ for item in delete_list:
             resp = controller.delete('asset/attribute', key)
         else:
             resp = controller.delete(item, key)
-        print(f"Key: {resp['key']} \nDeleted successfully")
+        print(f"Key: {key} \nDeleted successfully")
