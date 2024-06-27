@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0 (2024-06-27)
+
+- [New Feature] Renamed `--scripts` to `--plugin` flag to run scripts as plugins.
+- [New Feature] Added `plugin` command to run extended functionalities as CLI commands.
+- [Bug Fix] Add class tags for manual uploads and risk definitions
+- [New Plugin] Added `report` plugin to generate client reports using internal templates.
+
 ## 1.0.4
 
 - [New Feature] Added GitLab integration
