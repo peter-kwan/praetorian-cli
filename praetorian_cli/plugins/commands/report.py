@@ -5,7 +5,7 @@ risk to cache the risk information created in Chariot.
 
 Example usage:
 
-  praetorian chariot report [.env.risk-name]
+  praetorian chariot plugin report [.env.risk-name]
 
 Prerequisites:
 
@@ -17,10 +17,14 @@ import glob
 import os
 import pty
 import shutil
-import click
 import subprocess
+
+import click
+
 from praetorian_cli.handlers.utils import Status
 from praetorian_cli.sdk.chariot import Chariot
+from praetorian_cli.plugins.utils import requires
+
 
 class ReportingPlugin():
     def __init__(self, controller: Chariot, env_file: str):
@@ -135,6 +139,9 @@ class ReportingPlugin():
         self.env_manager.set(var_name, value)
         return value
 
+@requires('fzf',
+          'This script requires fzf. See instructions at https://github.com/junegunn/fzf?tab=readme-ov-file#installation.')
+@requires('git', 'This script requires git. See instructions at https://git-scm.com/downloads.')
 def run(controller, env_file: str):
     """ Execute the reporting workflow """
     ReportingPlugin(controller, env_file).workflow()
