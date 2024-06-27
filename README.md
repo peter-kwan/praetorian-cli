@@ -100,31 +100,30 @@ For more examples, visit [our documentation](https://docs.praetorian.com).
 The CLI has a plugin engine for implementing more complex workflows.
 
 There are two types of plugins:
-
-- **Scripts**: Invoked using `--plugin` option, they perform additional processing on the data returned by the
+- **Scripts**: Invoked using the `--plugin` option, they perform additional processing on the data returned by the
   CLI command.
 - **Commands**: Invoked using the `plugin <plugin_name>` command, they are standalone commands that extend the CLI with
   a relatively
   complex workflow.
 
-### Using plugin scripts
+### Examples of plugin scripts
 
+For example, this command uses `my-process-domain.py` to further process the data from `praetorian chariot get seed`:
 ```zsh
-praetorian chariot get seed <SEED_KEY> --plugin ~/code/my-process-seed.py
+praetorian chariot get seed <SEED_KEY> --plugin ~/code/my-process-domain.py
 ```
 
-The CLI ships with some built-in scripts in
-[this directory](https://github.com/praetorian-inc/praetorian-cli/tree/main/praetorian_cli/plugins/scripts) which can be
-invoked by name:
+The CLI also comes with some built-in scripts in
+[this directory](https://github.com/praetorian-inc/praetorian-cli/tree/main/praetorian_cli/plugins/scripts). They
+are invoked by name:
 
 ```zsh
 praetorian chariot get seed <SEED_KEY> --plugin list_assets
 ```
 
-### Using plugin commands
-
-Plugin commands add end-to-end function to the CLI as commands grouped under `plugin`. To see a list
-of all the plugins:
+### Examples of plugin commands
+Plugin commands add end-to-end functions as commands grouped under `plugin`. To see a list
+of them:
 
 ```zsh
 praetorian chariot plugin --help
@@ -144,6 +143,7 @@ If you have ideas on new plugin commands and scripts, contribute them!
 
 For developing plugins, you can refer to
 this [readme file](https://github.com/praetorian-inc/praetorian-cli/blob/main/praetorian_cli/plugins/README.md).
+
 
 ## Developer SDK
 
