@@ -12,13 +12,6 @@ class Asset(Enum):
     UNKNOWN = "U"
 
 
-class Job(Enum):
-    QUEUED = "JQ"
-    RUNNING = "JR"
-    FAIL = "JF"
-    PASS = "JP"
-
-
 class Risk(Enum):
     TRIAGE_INFO = "TI"
     TRIAGE_LOW = "TL"
@@ -56,7 +49,7 @@ class AddRisk(Enum):
     TRIAGE_CRITICAL = "TC"
 
 
-Status = {'asset': Asset, 'seed': Asset, 'job': Job, 'risk': Risk, 'add-risk': AddRisk}
+Status = {'asset': Asset, 'seed': Asset, 'risk': Risk, 'add-risk': AddRisk}
 
 key_set = {'assets': '#asset#', 'seeds': '#seed#', 'jobs': '#job#', 'risks': '#risk#', 'accounts': '#account#',
            'definitions': '#file#definitions/', 'integrations': '#account#', 'attributes': '#attribute#',
