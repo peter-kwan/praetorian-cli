@@ -12,21 +12,14 @@ def add(ctx):
     pass
 
 
-@add.command('seed')
-@click.argument('seed', required=True)
-@status_options(Status['seed'], 'seed')
-def seed(controller, seed, status, comment):
-    """ Add a seed """
-    controller.add('seed', dict(dns=seed, status=status, comment=comment))
-
-
 @add.command('asset')
 @cli_handler
 @click.option('-name', '--name', required=True, help='The name of the asset, e.g, IP address, GitHub repo URL')
 @click.option('-dns', '--dns', required=True, help='The DNS of the asset')
-def asset(controller, name, dns):
+@click.option('-seed', '--seed', is_flag=True, default=False, help='Enumerate for other assets from this asset')
+def asset(controller, name, dns, seed):
     """ Add an asset """
-    controller.add('asset', dict(name=name, dns=dns))
+    controller.add('asset', dict(name=name, dns=dns, seed=seed))
 
 
 @add.command('file')
@@ -86,6 +79,7 @@ def attribute(controller, name, key, clss):
         'class': clss
     }
     print(controller.add('asset/attribute', params))
+
 
 @add.command('reference')
 @cli_handler
