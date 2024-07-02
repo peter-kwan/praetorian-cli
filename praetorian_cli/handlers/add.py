@@ -15,9 +15,11 @@ def add(ctx):
 @add.command('asset')
 @cli_handler
 @click.option('-name', '--name', required=True, help='The name of the asset, e.g, IP address, GitHub repo URL')
-@click.option('-dns', '--dns', required=True, help='The DNS of the asset')
+@click.option('-dns', '--dns', required=False, help='The DNS of the asset')
 def asset(controller, name, dns):
     """ Add an asset """
+    if dns is None:
+        dns = name
     controller.add('asset', dict(name=name, dns=dns))
 
 
