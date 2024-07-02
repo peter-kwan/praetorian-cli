@@ -69,28 +69,13 @@ def job(controller, capability, key):
 @add.command('attribute')
 @cli_handler
 @click.argument('name', required=True)
-@click.option('-asset', '--asset', required=True, help='Key of an existing asset')
+@click.option('-key', '--key', required=True, help='Key of an existing asset or risk')
 @click.option('-class', '--class', 'clss', required=True, help='Class of the attribute')
 def attribute(controller, name, key, clss):
-    """ Add an attribute for an asset """
+    """ Add an attribute for an asset or risk"""
     params = {
         'key': key,
         'name': name,
         'class': clss
     }
-    print(controller.add('asset/attribute', params))
-
-
-@add.command('reference')
-@cli_handler
-@click.argument('name', required=True)
-@click.option('-risk', '--risk', required=True, help='Key of an existing risk')
-@click.option('-class', '--class', 'clss', required=True, help='Class of the reference')
-def reference(controller, name, key, clss):
-    """ Add a reference for a risk """
-    params = {
-        'key': key,
-        'name': name,
-        'class': clss
-    }
-    print(controller.add('risk/reference', params))
+    print(controller.add('attribute', params))
