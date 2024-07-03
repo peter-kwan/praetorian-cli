@@ -77,7 +77,7 @@ class ReportingPlugin():
         asset = self.controller.add('asset', dict(dns=name, name=name, status='F'))
         key = asset[0]['key']
         self.env_manager.set('ASSET_KEY', key)
-        self.controller.add('asset/attribute',
+        self.controller.add('attribute',
                             {'key': key, 'name': sow, 'class': 'SOW'})
         click.echo(f'Asset created in Chariot - {key}')
         return (sow, key)
