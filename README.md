@@ -66,6 +66,32 @@ username = lara.lynch@acme.com
 password = 8epu9bQ2kqb8qwd.GR
 ```
 
+### Authentication in organizations that use SSO
+
+SSO enabled accounts can use CLI by inviting password-based accounts as collaborators.
+These collaborator accounts can assume into the main account using the `--account` option
+in the CLI, or including that information in the keychain file itself:
+
+```
+[United States]
+name = chariot
+client_id = 795dnnr45so7m17cppta0b295o
+api = https://d0qcl2e18h.execute-api.us-east-2.amazonaws.com/chariot
+username = lara.lynch@acme.com
+password = 8epu9bQ2kqb8qwd.GR
+account = security.team@acme.com
+```
+
+There are two common approaches to manage CLI access in SSO organizations:
+
+1. Sign up a service account for CLI access, e.g. security.team+cli@acme.com.
+   In the master account, invite security-team+cli@acme.com as a collaborator.<br>
+   ℹ️ All CLI users share the keychain for the service account.
+2. Add each CLI user as a collaborator in the master account.<br>
+   ℹ️ Every CLI user signs up using password-based authentication.
+
+We recommend the first approach.
+
 ## Using the CLI
 
 The CLI is a command and option utility for access to the full suite of Chariot API. See documentation for commands
