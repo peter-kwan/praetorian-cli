@@ -146,12 +146,15 @@ class Chariot:
             os.remove(downloaded_path)
         except Exception as e:
             print(f"Failed to download proof of exploit: {e}. Skipping.")
-        poe_json = json.loads(poe_content) if poe_content else {}
+        try:
+            poe_json = json.loads(poe_content) if poe_content else {}
+        except json.JSONDecodeError:
+            poe_json = {}
         resp.update({
             "url": poe_json.get("url", ""),
             "ip": poe_json.get("ip", ""),
             "port": poe_json.get("port", ""),
-            "proof of exploit": base64.b64encode(poe_content.encode('utf-8')).decode('utf-8') if poe_json else ""
+            "proof of exploit": base64.b64encode(poe_content.encode('utf-8')).decode('utf-8') if poe_content else ""
         })
         return resp
 
