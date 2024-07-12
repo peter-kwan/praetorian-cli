@@ -1,14 +1,14 @@
 import os
-from os.path import join
-from os import environ, listdir
 from inspect import signature
+from os import environ, listdir
+from os.path import join
 
 import click
 
-from praetorian_cli.handlers.cli_decorators import load_raw_script
 from praetorian_cli.handlers.chariot import chariot
 from praetorian_cli.handlers.cli_decorators import cli_handler
-from praetorian_cli.plugins.commands import example, report, nessus
+from praetorian_cli.handlers.cli_decorators import load_raw_script
+from praetorian_cli.plugins.commands import example, report, nessus_api, nessus_xml
 
 
 @chariot.group()
@@ -43,7 +43,7 @@ def report_command(controller, env_file):
     report.run(controller, env_file)
 
 
-@plugin.command('nessus')
+@plugin.command('nessus-api')
 @cli_handler
 @click.option('--url', required=True, help='URL of the Nessus server',
               prompt='What is the URL of the Nessus server?')
@@ -51,9 +51,18 @@ def report_command(controller, env_file):
               prompt='What is the API key?')
 @click.option('--secret-key', required=True, help='Nessus secret key',
               prompt='What is the secret key?', hide_input=True)
-def nessus_command(controller, url, api_key, secret_key):
-    """ Run a Nessus scan """
-    nessus.report_vulns(controller, url, api_key, secret_key)
+def nessue_api_command(controller, url, api_key, secret_key):
+    """ Import Nessus results via API """
+    nessus_api.report_vulns(controller, url, api_key, secret_key)
+
+
+@plugin.command('nessus-xml')
+@cli_handler
+@click.option('--file', required=True, help='Path to the Nessus XML export file (.nessus)',
+              prompt='What is the path to the Nessus XML export file (.nessus)?')
+def nessus_xml_command(controller, file):
+    """ Import Nessus results via XML export file (.nessus) """
+    nessus_xml.report_vulns(controller, file)
 
 
 def load_dynamic_commands():
