@@ -85,18 +85,18 @@ class Chariot:
 
     @verify_credentials
     def upload(self, name: str, clss: str, upload_path: str = ""):
-        with open(name, 'rb') as file:
-            path = name
-            if upload_path != "":
-                path = upload_path
-
-            self._upload(path, clss, file)
+        path = upload_path if upload_path else name
+        with open(name, 'rb') as content:
+            self._upload(path, clss, content)
 
     @verify_credentials
     def _upload(self, name: str, clss: str, content: str):
-        resp = requests.put(f"{self.keychain.api}/file", params={"name": name, "class": clss}, data=content,
-                            allow_redirects=True, headers=self.keychain.headers)
-        process_failure(resp)
+        # It is a two-step upload. The PUT request to the /file endpoint is to get a presigned URL for S3.
+        # There is no data transfer.
+        presigned_url = requests.put(f"{self.keychain.api}/file", params={"name": name, "class": clss},
+                                     headers=self.keychain.headers)
+        process_failure(presigned_url)
+        requests.put(presigned_url.json()["url"], data=content)
 
     def sanitize_filename(self, filename: str) -> str:
         invalid_chars = '<>:"/\\|?*'
