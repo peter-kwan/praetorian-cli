@@ -26,22 +26,37 @@ def asset(controller, name, dns, priority):
 
 
 @add.command('file')
-@click.argument('name')
+@click.argument('path')
+@click.option('-name', '--name', help='The file name in Chariot. Default: the full path of the uploaded file')
 @cli_handler
-def upload(controller, name):
-    """ Upload a file """
-    controller.upload(name, "manual")
+def upload(controller, path, name):
+    """
+    Upload a file
+
+    PATH : File path in the local system
+    """
+    try:
+        controller.upload(path, "manual", name)
+    except Exception as e:
+        click.echo(f'Unable to upload file {path}. Error: {e}', err=True)
 
 
 @add.command('definition')
 @click.argument('path')
-@click.option('-name', '--name', required=False, help='The risk name definition. Default: the filename used')
+@click.option('-name', '--name', help='The risk name definition. Default: the filename used')
 @cli_handler
 def definition(controller, path, name):
-    """ Upload a definition to use for a risk """
+    """
+    Upload a risk definition in markdown format
+
+    PATH:  File path in the local system
+    """
     if name is None:
         name = path.split('/')[-1]
-    controller.upload(path, "definition", f"definitions/{name}")
+    try:
+        controller.upload(path, "definition", f"definitions/{name}")
+    except Exception as e:
+        click.echo(f'Unable to upload definition file {path}. Error: {e}', err=True)
 
 
 @add.command('webhook')
