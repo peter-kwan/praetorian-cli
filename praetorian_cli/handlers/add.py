@@ -33,10 +33,7 @@ def upload(controller, path, name):
     """
     Upload a file
 
-    PATH is the path to the file
-
-    --name is an optional parameter for the name of the file in Chariot. You can
-    use forward slashes in the file name.
+    PATH : File path in the local system
     """
     try:
         controller.upload(path, "manual", name)
@@ -50,9 +47,9 @@ def upload(controller, path, name):
 @cli_handler
 def definition(controller, path, name):
     """
-    Upload a definition to use for a risk
+    Upload a risk definition in markdown format
 
-    PATH is the path to the file containing the definition in markdown format
+    PATH:  File path in the local system
     """
     if name is None:
         name = path.split('/')[-1]
