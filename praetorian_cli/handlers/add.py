@@ -94,9 +94,9 @@ def job(controller, capability, asset):
 
 @add.command('attribute')
 @cli_handler
-@click.option('-key', '--key', required=True, help='Key of an existing asset or risk')
-@click.option('-name', '--name', required=True, help='Name of the attribute')
-@click.option('-value', '--value', required=True, help='Value of the attribute')
+@click.option('-k', '--key', required=True, help='Key of an existing asset or risk')
+@click.option('-n', '--name', required=True, help='Name of the attribute')
+@click.option('-v', '--value', required=True, help='Value of the attribute')
 def attribute(controller, key, name, value):
     """ Add an attribute for an asset or risk"""
     params = {
