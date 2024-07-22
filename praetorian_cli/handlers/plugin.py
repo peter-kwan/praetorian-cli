@@ -8,7 +8,7 @@ import click
 from praetorian_cli.handlers.chariot import chariot
 from praetorian_cli.handlers.cli_decorators import cli_handler
 from praetorian_cli.handlers.cli_decorators import load_raw_script
-from praetorian_cli.plugins.commands import example, report, nessus_api, nessus_xml
+from praetorian_cli.plugins.commands import example, nessus_api, nessus_xml
 
 
 @chariot.group()
@@ -33,14 +33,6 @@ def example_command(controller, arg1, arg2, opt1, sow, flag_opt):
         ARG1 is a string argument; ARG2 is an integer argument
     """
     example.run(controller, arg1, arg2, opt1, sow, flag_opt)
-
-
-@plugin.command('report')
-@cli_handler
-@click.argument('env_file', type=click.Path(exists=False), default='.env')
-def report_command(controller, env_file):
-    """ Praetorian reporting workflow """
-    report.run(controller, env_file)
 
 
 @plugin.command('nessus-api')
