@@ -7,7 +7,7 @@ The `configure` command asks questions as follows:
 ```
 $ praetorian configure
 Enter your Praetorian credentials to store in the keychain
-Enter your email: lara.lynch@acme.com
+Enter your email:
 Enter your password:
 Enter the profile name [United States]:
 Enter the URL of backend API [https://d0qcl2e18h.execute-api.us-east-2.amazonaws.com/chariot]:
@@ -33,9 +33,10 @@ organized into sections of _profiles_ (names in square brackets). You can use th
 multiple access credentials into a single keychain file.
 
 The `configure` command operates in an "upsert" manner with the profiles, including the
-default "United States" profile. So, when you run `configure` and provide a
+default "United States" profile. So, when you run `configure` and provide an
 existing profile name, it will update the fields in that profile. When you provide
-a new profile name, it will add a new section for it.
+a new profile name, it will add a new section for the profile, without affecting other
+profiles.
 
 
 ## Authentication in organizations that use SSO
