@@ -49,6 +49,7 @@ def report(controller, name):
 
 @get.command('risk')
 @cli_handler
+@plugins
 @click.argument('key', required=True)
 @click.option('-details', '--details', is_flag=True, help='Get additional details')
 def risk(controller, key, details):
