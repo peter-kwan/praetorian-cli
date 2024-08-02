@@ -90,52 +90,16 @@ To get detailed information about a specific asset, run:
 praetorian chariot get asset <ASSET_KEY>
 ```
 
-To try one of our plugin scripts, run:
-
-```zsh
-praetorian chariot get asset <ASSET_KEY> --plugin list_assets
-````
-
-For more examples, visit [our documentation](https://docs.praetorian.com).
-
 # Using plugins
 
-The CLI has a plugin engine for implementing more complex workflows.
-
-There are two types of plugins:
-
-- **Scripts**: Invoked using the `--plugin` option, they perform additional processing on the data returned by the
-  CLI command.
-- **Commands**: Invoked using the `plugin <plugin_name>` command, they are standalone commands that extend
-  The CLI with a relatively complex workflow.
-
-## Invoking plugin scripts
-
-As a hypothetical example, this command uses `my-process-domain.py` to further process the data from
-`praetorian chariot get asset`:
-
-```zsh
-praetorian chariot get asset <ASSET_KEY> --plugin ~/code/my-process-domain.py
-```
-
-The CLI comes with some built-in scripts in
-[this directory](https://github.com/praetorian-inc/praetorian-cli/tree/main/praetorian_cli/plugins/scripts). They
-are invoked by name:
-
-```zsh
-praetorian chariot get asset <ASSET_KEY> --plugin list_assets
-```
-
-## Invoking plugin commands
-
-Plugin commands add end-to-end functions as commands grouped under `plugin`. To see a list
-of them:
+The CLI has a plugin engine for implementing more complex workflows. They add end-to-end functions as commands
+grouped under `plugin`. To see a list of them:
 
 ```zsh
 praetorian chariot plugin --help
 ```
 
-For example this command is used to ingest scan results from Nessus XML export files:
+For example the following command is used to ingest scan results from Nessus XML export files:
 
 ```zsh
 praetorian chariot plugin nessus-xml
@@ -175,11 +139,10 @@ You can inspect the handler code to see how each CLI command is implemented with
 
 ## Developing plugins
 
-If you want to take advantage of the scaffolding of the CLI, you can write fully fledged function using
+If you want to take advantage of the scaffolding of the CLI, you can write fully fledged functions using
 the plugin engine. For developing plugins, you can refer to
 this [readme file](https://github.com/praetorian-inc/praetorian-cli/blob/main/docs/plugin-development.md).
 
-If you have ideas on new plugin commands and scripts, contribute them!
 
 ## Contributing
 
