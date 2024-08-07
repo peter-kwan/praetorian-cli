@@ -42,5 +42,9 @@ class TestFile(BaseTest):
         assert os.path.exists(self.download_dir) is True
         utils.assert_files_equal(self.upload_file, os.path.join(self.download_dir, self.file_name))
 
+    def test_download_content(self):
+        content = self.chariot.download(self.upload_file)
+        assert content == self.asset
+
     def teardown_class(self):
         shutil.rmtree('resources')
