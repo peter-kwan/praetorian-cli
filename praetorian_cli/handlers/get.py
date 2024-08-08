@@ -1,5 +1,6 @@
 import base64
 import json
+import os
 
 import click
 
@@ -17,7 +18,7 @@ def get(ctx):
 @get.command('file')
 @cli_handler
 @click.argument('name')
-@click.option('-path', '--path', default="", help="Download path. Default: save to current directory")
+@click.option('-path', '--path', default=os.getcwd(), help="Download path. Default: save to current directory")
 def download_file(controller, name, path):
     """ Download a file using key or name."""
     if name.startswith('#'):

@@ -104,10 +104,12 @@ class Chariot:
         return filename
 
     @verify_credentials
-    def download(self, name: str, download_path: str) -> bool:
+    def download(self, name: str, download_path: str = ""):
         resp = requests.get(f"{self.keychain.api}/file", params={"name": name}, allow_redirects=True,
                             headers=self.keychain.headers)
         process_failure(resp)
+        if not download_path:
+            return resp.content.decode('utf-8')
 
         name = self.sanitize_filename(name)
         directory = os.path.expanduser(download_path)
@@ -115,10 +117,8 @@ class Chariot:
             os.makedirs(directory)
 
         download_path = os.path.join(directory, name)
-
         with open(download_path, 'wb') as file:
             file.write(resp.content)
-
         return download_path
 
     @verify_credentials
