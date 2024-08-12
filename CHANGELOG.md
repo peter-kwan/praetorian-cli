@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.6 (2024-08-12)
+
+* [New Feature] Added support in sdk to download files as a stream
+
 ## 1.3.5 (2024-08-05)
 
 * [Breaking Change] Renamed `plugin` to `script`
