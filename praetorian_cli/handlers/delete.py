@@ -24,6 +24,16 @@ def delete_asset(controller, key):
     controller.update('asset', dict(key=key, status=Asset.DELETED.value))
 
 
+@delete.command('webhook')
+@cli_handler
+def delete_webhook(controller):
+    """ Delete webhook """
+    if controller.delete_webhook():
+        print("Webhook successfully deleted.")
+    else:
+        print("No webhook previously exists.")
+
+
 def delete_command(item):
     @delete.command(item, help=f"Delete {item}")
     @click.argument('key', required=True)

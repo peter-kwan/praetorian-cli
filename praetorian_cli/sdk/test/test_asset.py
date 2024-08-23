@@ -38,10 +38,15 @@ class TestAsset(BaseTest):
             assert job['status'] is not None, "Job Status is empty"
 
     def test_freeze_asset(self):
-        response = self.chariot.update('asset', dict(key=f'#asset#{self.asset}', status=Asset.FROZEN.value))[0]
+        response = self.chariot.update('asset', dict(key=self.key(), status=Asset.FROZEN.value))[0]
         assert response['status'] == Asset.FROZEN.value, "Response does not have correct status"
+        response = self.chariot.my(dict(key=self.key()))
+        print(f'in test_freeze_asset, response of my = {response}')
 
     def test_delete_asset(self):
-        self.chariot.update('asset', dict(key=f'#asset#{self.asset}', status='D'))
-        response = self.chariot.my(dict(key=f'#asset#{self.asset}'))
-        assert response['assets'][0]['status'] == 'D'
+        self.chariot.update('asset', dict(key=self.key(), status=Asset.DELETED.value))
+        response = self.chariot.my(dict(key=self.key()))
+        assert response == {}
+
+    def key(self):
+        return f'#asset#{self.asset}#{self.asset}'

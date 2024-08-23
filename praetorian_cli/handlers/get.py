@@ -61,6 +61,17 @@ def risk(controller, key, details):
     print(json.dumps(resp, indent=4))
 
 
+@get.command('webhook')
+@cli_handler
+def risk(controller):
+    """ Get the webhook URL """
+    hook = controller.get_webhook()
+    if hook:
+        print(controller.webhook_url(hook['value']))
+    else:
+        print("No existing webhook.")
+
+
 get_list = ['assets', 'attributes', 'jobs', 'accounts', 'integrations']
 
 

@@ -14,7 +14,7 @@ class TestRisk(BaseTest):
 
     def setup_class(self):
         self.chariot, self.username = BaseTest.setup_chariot(self)
-        webhook = self.chariot.add_webhook()
+        webhook = utils.get_or_create_webhook(self.chariot)
         utils.add_asset_via_webhook(webhook, self.asset_payload)
 
     def test_add_risk(self):

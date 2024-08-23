@@ -63,8 +63,10 @@ def definition(controller, path, name):
 @cli_handler
 def webhook(controller):
     """ Add an authenticated URL for posting assets and risks """
-    response = controller.add_webhook()
-    print(response)
+    if controller.get_webhook():
+        print("There is an existing webhook. Delete it first before adding a new one.")
+    else:
+        print(controller.add_webhook())
 
 
 @add.command('risk')

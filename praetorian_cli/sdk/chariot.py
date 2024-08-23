@@ -48,8 +48,8 @@ class Chariot:
         return resp.json()
 
     @verify_credentials
-    def delete(self, type, key: str) -> {}:
-        resp = requests.delete(f"{self.keychain.api}/{type}", json={'key': key},
+    def delete(self, type, key: str, params: dict = {}) -> {}:
+        resp = requests.delete(f"{self.keychain.api}/{type}", json=dict(key=key) | params,
                                headers=self.keychain.headers)
         process_failure(resp)
         return resp.json()
@@ -69,16 +69,16 @@ class Chariot:
         return resp.text
 
     @verify_credentials
-    def link_account(self, username: str, config: dict, id: str = ""):
-        resp = requests.post(f"{self.keychain.api}/account/{username}", json={'config': config, 'value': id},
+    def link_account(self, username: str, config: dict, value: str = ""):
+        resp = requests.post(f"{self.keychain.api}/account/{username}", json={'config': config, 'value': value},
                              headers=self.keychain.headers)
         process_failure(resp)
         return resp.json()
 
     @verify_credentials
-    def unlink(self, username: str, id: str = ""):
+    def unlink(self, username: str, value: str = ""):
         resp = requests.delete(f"{self.keychain.api}/account/{username}", headers=self.keychain.headers,
-                               json={'value': id})
+                               json={'value': value})
         process_failure(resp)
         return resp.json()
 
@@ -124,11 +124,41 @@ class Chariot:
     @verify_credentials
     def add_webhook(self):
         pin = str(uuid4())
-        self.link_account(username="hook", config={'pin': pin})
+        self.link_account(username="hook", config={}, value=pin)
+        return self.webhook_url(pin)
+
+    @verify_credentials
+    def delete_webhook(self):
+        hook = self.get_webhook()
+        if hook:
+            self.delete('account/hook', hook['key'], dict(member='hook', value=hook['value']))
+            return hook
+        else:
+            return None
+
+    @verify_credentials
+    def get_webhook(self):
+        for i in self.list_integrations():
+            if i['member'] == 'hook':
+                return i
+        return None
+
+    @verify_credentials
+    def list_accounts(self, page=1):
+        return self.my(dict(key='#account#'), page)
+
+    @verify_credentials
+    def list_integrations(self, page=1):
+        resp = self.list_accounts(page)
+        if 'accounts' in resp:
+            return [i for i in resp['accounts'] if '@' not in i['member'] and i['member'] != 'settings']
+        else:
+            return []
+
+    @verify_credentials
+    def webhook_url(self, pin):
         username = b64encode(self.keychain.username.encode('utf8'))
-        encoded_string = username.decode('utf8')
-        encoded_username = encoded_string.rstrip('=')
-        return f'{self.keychain.api}/hook/{encoded_username}/{pin}'
+        return f'{self.keychain.api}/hook/{username.decode("utf8").rstrip("=")}/{pin}'
 
     @verify_credentials
     def purge(self):

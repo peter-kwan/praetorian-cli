@@ -19,6 +19,14 @@ def add_asset_via_webhook(webhook, asset_payload):
     assert webhook_post.status_code == 200, "Webhook POST request failed"
 
 
+def get_or_create_webhook(chariot):
+    hook = chariot.get_webhook()
+    if hook:
+        return chariot.webhook_url(hook['value'])
+    else:
+        return chariot.add_webhook()
+
+
 def verify_cli(command, expected_stdout=[], expected_stderr=[]):
     result = run(f'praetorian chariot {command}', capture_output=True, text=True, shell=True)
     if expected_stdout:
