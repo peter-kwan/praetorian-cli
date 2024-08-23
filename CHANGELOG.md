@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.7 (2024-08-23)
+
+* [Misc] Nessus scripts updated to upload proofs of exploits to new file location
+* [Misc] Webhook commands adjusted for the storage of the PIN
+* [Misc] Regression tests updated
+
 ## 1.3.6 (2024-08-12)
 
 * [New Feature] Added support in sdk to download files as a stream
