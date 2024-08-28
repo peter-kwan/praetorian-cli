@@ -22,47 +22,38 @@ For risks, the `status` field has the following shorthands. These shorthands are
 `add risk` and `update risk` commands. They are also used in the JSON output
 of the `get risk` and `list risk --details` commands:
 
-| Risk status | State                   | Priority |
-|-------------|-------------------------|----------|
-| T           | Triage                  | -        |
-| TI          | Triage                  | Info     |
-| TL          | Triage                  | Low      |
-| TM          | Triage                  | Medium   |
-| TH          | Triage                  | High     |
-| TC          | Triage                  | Critical |
-| O           | Open                    | -        |
-| OI          | Open                    | Info     |
-| OL          | Open                    | Low      |
-| OM          | Open                    | Medium   |
-| OH          | Open                    | High     |
-| OC          | Open                    | Critical |
-| C           | Closed                  | -        |
-| CI          | Closed                  | Info     |
-| CL          | Closed                  | Low      |
-| CM          | Closed                  | Medium   |
-| CH          | Closed                  | High     |
-| CC          | Closed                  | Critical |
-| CIF         | Closed (False Positive) | Info     |
-| CLF         | Closed (False Positive) | Low      |
-| CMF         | Closed (False Positive) | Medium   |
-| CHF         | Closed (False Positive) | High     |
-| CCF         | Closed (False Positive) | Critical |
-| CIR         | Closed (Rejected)       | Info     |
-| CLR         | Closed (Rejected)       | Low      |
-| CMR         | Closed (Rejected)       | Medium   |
-| CHR         | Closed (Rejected)       | High     |
-| CCR         | Closed (Rejected)       | Critical |
-| CIS         | Closed (Out of Scope)   | Info     |
-| CLS         | Closed (Out of Scope)   | Low      |
-| CMS         | Closed (Out of Scope)   | Medium   |
-| CHS         | Closed (Out of Scope)   | High     |
-| CCS         | Closed (Out of Scope)   | Critical |
-| M           | Closed (Machine)        | -        |
-| MI          | Closed (Machine)        | Info     |
-| ML          | Closed (Machine)        | Low      |
-| MM          | Closed (Machine)        | Medium   |
-| MH          | Closed (Machine)        | High     |
-| MC          | Closed (Machine)        | Critical |
+| Risk status | State           | Priority |
+|-------------|-----------------|----------|
+| T           | Triage          | -        |
+| TI          | Triage          | Info     |
+| TL          | Triage          | Low      |
+| TM          | Triage          | Medium   |
+| TH          | Triage          | High     |
+| TC          | Triage          | Critical |
+| O           | Open            | -        |
+| OI          | Open            | Info     |
+| OL          | Open            | Low      |
+| OM          | Open            | Medium   |
+| OH          | Open            | High     |
+| OC          | Open            | Critical |
+| R           | Remediated      | -        |
+| RI          | Remediated      | Info     |
+| RL          | Remediated      | Low      |
+| RM          | Remediated      | Medium   |
+| RH          | Remediated      | High     |
+| RC          | Remediated      | Critical |
+| MO          | Machine-opened  | -        |
+| MOI         | Machine-opened  | Info     |
+| MOL         | Machine-opened  | Low      |
+| MOM         | Machine-opened  | Medium   |
+| MOH         | Machine-opened  | High     |
+| MOC         | Machine-opened  | Critical |
+| MD          | Machine-deleted | -        |
+| MDI         | Machine-deleted | Info     |
+| MDL         | Machine-deleted | Low      |
+| MDM         | Machine-deleted | Medium   |
+| MDH         | Machine-deleted | High     |
+| MDC         | Machine-deleted | Critical |
 
 # Job statuses
 
@@ -75,4 +66,5 @@ output of the `get job` and `list jobs --details` commands:
 | JR         | The job is running              |
 | JF         | The job failed                  |
 | JP         | The job passed                  |
+
 

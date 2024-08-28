@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.8 (2024-08-28)
+
+* [Misc] Risk statuses updated with AI-based actions. See
+  [the updated documentation](https://github.com/praetorian-inc/praetorian-cli/blob/main/docs/terminology.md) for
+  details.
+
 ## 1.3.7 (2024-08-23)
 
 * [Misc] Nessus scripts updated to upload proofs of exploits to new file location
