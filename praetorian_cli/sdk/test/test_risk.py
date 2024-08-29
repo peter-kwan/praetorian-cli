@@ -2,6 +2,7 @@ import time
 
 import pytest
 
+from praetorian_cli.handlers.utils import Risk
 from praetorian_cli.sdk.test import BaseTest, utils
 
 
@@ -32,7 +33,7 @@ class TestRisk(BaseTest):
             "None of the risks matched self.risk_payload['name']"
 
     def test_update_risk(self):
-        response = self.chariot.update('risk', dict(key=f'#risk#{TestRisk.key}', status='CI'))
-        for risk in response['risks']:
-            assert risk['status'] == 'CI'
-            assert risk['name'] == TestRisk.risk_payload['name']
+        self.chariot.update('risk', dict(key=f'#risk#{TestRisk.key}', status=Risk.MACHINE_OPEN_CRITICAL.value))
+        response = self.chariot.my(dict(key=f'#risk#{TestRisk.key}'))
+        assert response['risks'][0]['status'] == Risk.MACHINE_OPEN_CRITICAL.value
+        assert response['risks'][0]['name'] == TestRisk.risk_payload['name']
