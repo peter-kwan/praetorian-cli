@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.9 (2024-09-03)
+
+* [Misc] Updated the API call for asset creation to align with a backend API change.
+
 ## 1.3.8 (2024-08-28)
 
 * [Misc] Risk statuses updated with AI-based actions. See
