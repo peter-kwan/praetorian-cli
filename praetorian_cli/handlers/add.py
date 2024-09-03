@@ -22,7 +22,7 @@ def asset(controller, name, dns, priority):
     """ Add an asset """
     if dns is None:
         dns = name
-    controller.add('asset', dict(name=name, dns=dns, status=AssetPriorities[priority]))
+    controller.update('asset', dict(name=name, dns=dns, status=AssetPriorities[priority]))
 
 
 @add.command('file')
