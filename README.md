@@ -7,7 +7,7 @@
 [![Open Source Libraries](https://img.shields.io/badge/Open--source-%F0%9F%92%9A-28a745)](https://opensource.org/)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg?style=flat)](https://github.com/praetorian-inc/chariot-ui/issues)
 
-:link: [Chariot Platform](https://preview.chariot.praetorian.com)
+:link: [Chariot Platform](https://chariot.praetorian.com)
 :book: [Documentation](https://docs.praetorian.com)
 :bookmark: [PyPI](https://pypi.org/project/praetorian-cli/)
 :computer: [Chariot UI](https://github.com/praetorian-inc/chariot-ui)
@@ -51,7 +51,7 @@ pip install praetorian-cli
 
 ## Signing up and configuration
 
-1. Register for an account for [Chariot](http://preview.chariot.praetorian.com) using the instructions
+1. Register for an account for [Chariot](http://chariot.praetorian.com) using the instructions
    in [our documentation](https://docs.praetorian.com/hc/en-us/articles/25784233986587-Account-Setup-and-Initial-Seeding).
 2. Run `praetorian configure` and follow the prompts.
 3. It creates `~/.praetorian/keychain.ini`, which should read like this:
